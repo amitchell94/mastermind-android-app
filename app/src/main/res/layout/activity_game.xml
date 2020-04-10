@@ -4,7 +4,48 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/guess_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:color/white"
+                android:onClick="selectFirstColour"/>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:color/white"
+                android:onClick="selectSecondColour"/>
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:color/white"
+                android:onClick="selectThirdColour"/>
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:color/white"
+
+                android:onClick="selectFourthColour"/>
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="GO"
+                android:onClick="guessCode"/>
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>
