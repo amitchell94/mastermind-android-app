@@ -23,10 +23,10 @@ public class GameActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<GuessResult> guessList = new ArrayList<>();
 
-    SelectColour selectFirstColour;
-    SelectColour selectSecondColour;
-    SelectColour selectThirdColour;
-    SelectColour selectFourthColour;
+    SelectColourDialogFragment selectFirstColour;
+    SelectColourDialogFragment selectSecondColour;
+    SelectColourDialogFragment selectThirdColour;
+    SelectColourDialogFragment selectFourthColour;
 
     Colours[] target = new Colours[4];
 
@@ -44,10 +44,10 @@ public class GameActivity extends AppCompatActivity {
 
         target = generateRandomBoard();
 
-        selectFirstColour = new SelectColour();
-        selectSecondColour = new SelectColour();
-        selectThirdColour = new SelectColour();
-        selectFourthColour = new SelectColour();
+        selectFirstColour = new SelectColourDialogFragment();
+        selectSecondColour = new SelectColourDialogFragment();
+        selectThirdColour = new SelectColourDialogFragment();
+        selectFourthColour = new SelectColourDialogFragment();
 
         selectFirstColour.setButton((Button) findViewById(R.id.button1));
         selectSecondColour.setButton((Button) findViewById(R.id.button2));
@@ -87,19 +87,19 @@ public class GameActivity extends AppCompatActivity {
 
     public void selectFirstColour(View view) {
 
-        selectFirstColour.show(getSupportFragmentManager(), "NoticeDialogFragmen");
+        selectFirstColour.show(getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
     public void selectSecondColour(View view) {
-        selectSecondColour.show(getSupportFragmentManager(), "NoticeDialogFragmen");
+        selectSecondColour.show(getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
     public void selectThirdColour(View view) {
-        selectThirdColour.show(getSupportFragmentManager(), "NoticeDialogFragmen");
+        selectThirdColour.show(getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
     public void selectFourthColour(View view) {
-        selectFourthColour.show(getSupportFragmentManager(), "NoticeDialogFragmen");
+        selectFourthColour.show(getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
     public void guessCode(View view) {
@@ -117,9 +117,13 @@ public class GameActivity extends AppCompatActivity {
             }
             GuessResult guessResult = new GuessResult(guess,result);
 
-            guessList.add(0,guessResult);
+            guessList.add(guessResult);
             mAdapter.notifyDataSetChanged();
-
+            mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+            if (guessResult.getResult().getCorrectColoursInTheRightPlace() >= 4) {
+                GameCompleteDialogFragment gameCompleteDialogFragment = new GameCompleteDialogFragment();
+                gameCompleteDialogFragment.show(getSupportFragmentManager(), "NoticeDialogFragment");
+            }
     }
 
     private static EvaluationResult evaluate(Colours[] target, Colours[] guess) {
@@ -134,7 +138,7 @@ public class GameActivity extends AppCompatActivity {
 
         for (int i = 0; i < guess.length; i++) {
             for (int j = 0; j < target.length; j++) {
-                if (!guessedColours[j]) {
+                if (!guessedColours[j] && !guessedColours[i]) {
                     if (guess[i].equals(target[j])) {
                         result.incrementColoursInTheWrongPlace();
                         guessedColours[j] = true;

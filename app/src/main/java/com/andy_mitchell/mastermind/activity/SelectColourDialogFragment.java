@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import com.andy_mitchell.mastermind.Colours;
 
-public class SelectColour extends DialogFragment {
+public class SelectColourDialogFragment extends DialogFragment {
 
     private Colours colourToBeSelected = Colours.WHITE;
     private Button button;
