@@ -1,36 +1,51 @@
 package com.andy_mitchell.mastermind;
 
+import android.graphics.Color;
+
 public class ResultParser {
 
-    public static String getStringFromGuessResult(GuessResult guessResult) {
-        String str = getStringFromColourArray(guessResult.getGuess());
-
-        return str;
-    }
-
-    private static String getStringFromColourArray(Colours[] colourArray) {
-        String str = "";
-        for (Colours colour: colourArray) {
-            str += getStringFromColour(colour) + " ";
+    public static int[] getIntColorArrayFromEvaluationResult(EvaluationResult evaluationResult) {
+        int correctPieces = evaluationResult.getCorrectColoursInTheRightPlace();
+        int almostCorrectPieces = evaluationResult.getCorrectColoursInTheWrongPlace();
+        int[] intColorArray = new int[4];
+        for (int i = 0; i < intColorArray.length; i++) {
+            if (correctPieces == 0 && almostCorrectPieces == 0){
+                intColorArray[i] = Color.GRAY;
+            } else if (correctPieces > 0) {
+                intColorArray[i] = Color.BLACK;
+                correctPieces -= 1;
+            } else {
+                intColorArray[i] = Color.WHITE;
+                almostCorrectPieces -= 1;
+            }
         }
-        return str;
+
+        return intColorArray;
     }
 
-    private static String getStringFromColour (Colours colour) {
+    public static int[] getIntColorArrayFromColourArray(Colours[] colourArray) {
+        int[] intColorArray = new int[colourArray.length];
+        for (int i = 0; i < colourArray.length; i++) {
+            intColorArray[i] = getIntColorFromColour(colourArray[i]);
+        }
+        return intColorArray;
+    }
+
+    private static int getIntColorFromColour (Colours colour) {
         switch (colour) {
             case BLACK:
-                return "Black";
+                return Color.BLACK;
             case RED:
-                return "Red";
+                return Color.RED;
             case BLUE:
-                return "blue";
+                return Color.BLUE;
             case GREEN:
-                return "green";
+                return Color.GREEN;
             case WHITE:
-                return "white";
+                return Color.WHITE;
             case YELLOW:
-                return "yellow";
+                return Color.YELLOW;
         }
-        return null;
+        return 0;
     }
 }
