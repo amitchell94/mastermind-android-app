@@ -2,11 +2,20 @@
 <android.support.v7.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Try to crack the code by making a guess!"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/guess_recycler_view"
@@ -52,7 +61,11 @@
                 android:layout_height="50dp"
                 android:text="Guess"
                 android:layout_margin="5dp"
-                android:onClick="guessCode"/>
+                android:onClick="guessCode"
+                android:background="@drawable/button_shape"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"/>
         </LinearLayout>
 
     </LinearLayout>

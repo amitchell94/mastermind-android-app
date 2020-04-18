@@ -3,6 +3,7 @@ package com.andy_mitchell.mastermind.activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,7 +21,8 @@ public class GameCompleteDialogFragment extends DialogFragment {
                 .setPositiveButton("Play again", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        getActivity().finish();
+                        startActivity(new Intent(getActivity(),GameActivity.class));
                     }
                 })
                 .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
@@ -30,5 +32,9 @@ public class GameCompleteDialogFragment extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    public void setGameCompleteText(String gameCompleteText) {
+        this.gameCompleteText = gameCompleteText;
     }
 }
