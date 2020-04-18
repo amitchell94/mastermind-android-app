@@ -18,4 +18,8 @@ public class MainActivity extends AppCompatActivity {
     public void playGame(View view) {
         startActivity(new Intent(MainActivity.this, GameActivity.class));
     }
+
+    public void showTutorial(View view) {
+        startActivity(new Intent(MainActivity.this, TutorialActivity.class));
+    }
 }

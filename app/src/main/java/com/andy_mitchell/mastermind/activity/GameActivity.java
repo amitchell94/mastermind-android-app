@@ -28,7 +28,8 @@ public class GameActivity extends AppCompatActivity {
     SelectColourDialogFragment selectThirdColour;
     SelectColourDialogFragment selectFourthColour;
 
-    Colours[] target = new Colours[4];
+  //  Colours[] target = new Colours[4];
+    Colours[] target = {Colours.BLACK,Colours.RED,Colours.GREEN,Colours.WHITE};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(mAdapter);
 
-        target = generateRandomBoard();
+       // target = generateRandomBoard();
 
         selectFirstColour = new SelectColourDialogFragment();
         selectSecondColour = new SelectColourDialogFragment();
@@ -122,26 +123,31 @@ public class GameActivity extends AppCompatActivity {
             mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
             if (guessResult.getResult().getCorrectColoursInTheRightPlace() >= 4) {
                 GameCompleteDialogFragment gameCompleteDialogFragment = new GameCompleteDialogFragment();
+                gameCompleteDialogFragment.setGameCompleteText("You guessed the code!");
                 gameCompleteDialogFragment.show(getSupportFragmentManager(), "NoticeDialogFragment");
             }
     }
 
     private static EvaluationResult evaluate(Colours[] target, Colours[] guess) {
         EvaluationResult result = new EvaluationResult();
-        boolean[] guessedColours = new boolean[4];
+        boolean[] targetGuessed = new boolean[4];
+        boolean[] guessGuessed = new boolean[4];
+
         for (int i = 0; i < target.length; i++) {
             if (target[i].equals(guess[i])) {
                 result.incrementColoursInTheRightPlace();
-                guessedColours[i] = true;
+                targetGuessed[i] = true;
+                guessGuessed[i] = true;
             }
         }
 
-        for (int i = 0; i < guess.length; i++) {
-            for (int j = 0; j < target.length; j++) {
-                if (!guessedColours[j] && !guessedColours[i]) {
-                    if (guess[i].equals(target[j])) {
+        for (int guessInc = 0; guessInc < guess.length; guessInc++) {
+            for (int targetInc = 0; targetInc < target.length; targetInc++) {
+                if (!targetGuessed[targetInc] && !guessGuessed[guessInc]) {
+                    if (guess[guessInc].equals(target[targetInc])) {
                         result.incrementColoursInTheWrongPlace();
-                        guessedColours[j] = true;
+                        guessGuessed[guessInc] = true;
+                        targetGuessed[targetInc] = true;
                         break;
                     }
                 }

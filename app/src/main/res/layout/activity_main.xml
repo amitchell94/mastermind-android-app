@@ -9,13 +9,45 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="75dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:text="Mastermind"
+        android:textAlignment="center"
+        android:textSize="32dp"
+        android:textColor="@android:color/black"
+        />
     <Button
+        android:layout_marginTop="150dp"
         android:layout_width="200dp"
-        android:layout_height="75dp"
         android:text="Play Game"
-        android:textSize="20dp"
-        android:onClick="playGame"/>
+        android:onClick="playGame"
+        android:id="@+id/loginbutton"
+        android:layout_height="45dp"
+        android:background="@drawable/button_shape"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="26dp"
+        android:layout_marginHorizontal="25dp" />
+    <Button
+        android:layout_marginTop="15dp"
+        android:layout_width="200dp"
+        android:text="How to play"
+        android:onClick="showTutorial"
+        android:layout_height="45dp"
+        android:background="@drawable/button_shape"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="26dp"
+        android:layout_marginHorizontal="25dp" />
 </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
