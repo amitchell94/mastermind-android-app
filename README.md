@@ -1,7 +1,5 @@
 # Mastermind Android Application
 
-[Google Play store link](https://medium.freecodecamp.org/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37)
-
 This is an Android application which allows users to play the game the classic game Mastermind.
 
 Users make guesses to try and decipher a code consisting of four colours. 
